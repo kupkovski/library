@@ -1,1 +1,5 @@
 <h1>Welcome to Library Management System!</h1>
+
+<% if current_user.member? %>
+  <h2>Borrowed Books</h2>
+<% end %>
