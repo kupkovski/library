@@ -5,6 +5,9 @@
 <div>
   <%= link_to "Edit this book", edit_book_path(@book) %> |
   <%= link_to "Back to books", books_path %>
+  <% if current_user.member? && @book.available? %>
+    | <%= link_to "Borrow this book", borrow_book_path(@book), data: { turbo_method: :put } %>
+  <% end %>
 
   <%= button_to "Destroy this book", @book, method: :delete %>
 </div>

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[show edit update destroy borrow]
 
   # GET /books or /books.json
   def index
@@ -54,6 +54,16 @@ class BooksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # PUT /books/1/borrow
+  def borrow
+    binding.irb
+    if borrowed_book = @book.borrow!(user: current_user)
+      redirect_to book_url(@book), notice: "Book was successfully borrowed."
+    else
+      redirect_to book_url(@book), error: "#{borrowed_book.errors.full_messages}"
     end
   end
 
