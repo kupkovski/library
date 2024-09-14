@@ -1,22 +1,7 @@
 <h1>Welcome to Library Management System!</h1>
 
-<% if @borrowed_books.any? %>
-  <h2>Borrowed Books</h2>
-  <table border="1">
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Borrowed Date</th>
-      <th>Due Date</th>
-    </tr>
-    <% @borrowed_books.each do |borrowed_book| %>
-    <% book = borrowed_book.book %>
-      <tr>
-        <td><%= link_to book.title, book_path(book) %></td>
-        <td><%= book.author_name %></td>
-        <td><%= l(borrowed_book.created_at, format: :short) %></td>
-        <td><%= l(borrowed_book.due_date, format: :short) %></td>
-      </tr>
-    <% end %>
-  </table>
+<% if current_user.librarian? %>
+  <%= render "home/librarian", borrowed_books: @borrowed_books %>
+<% else %>
+  <%= render "home/member", borrowed_books: @borrowed_books %>
 <% end %>

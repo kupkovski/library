@@ -1,0 +1,30 @@
+<h2>Librarian Dashboard</h2>
+<table border="1">
+  <tr>
+    <th>Total Books</th>
+    <th>Total Borrowed Books</th>
+    <th>Books Due Today</th>
+  </tr>
+  <tr>
+    <td><%= @books_count %></td>
+    <td><%= borrowed_books.count %></td>
+    <td><%= @books_due_today_count %></td>
+  </tr>
+</table>
+
+<h3>Members with overdue books</h3>
+<table border="1">
+  <tr>
+    <th>Member Name</th>
+    <th>Book Title</th>
+    <th>Due Date</th>
+  </tr>
+
+  <% @members_with_overdue_books.each do |borrowed_book| %>
+    <tr>
+      <td><%= borrowed_book.user.name %></td>
+      <td><%= link_to borrowed_book.book.title, book_path(borrowed_book.book) %></td>
+      <td><%= l(borrowed_book.due_date, format: :short) %></td>
+    </tr>
+  <% end %>
+</table>

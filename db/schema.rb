@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_14_163818) do
   create_table "borrowed_books", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "book_id", null: false
+    t.datetime "due_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_borrowed_books_on_book_id"

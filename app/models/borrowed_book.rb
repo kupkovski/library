@@ -2,9 +2,8 @@ class BorrowedBook < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
-  def due_date
-    return nil if created_at.blank?
+  validates :due_date, presence: true
 
-    created_at + 2.weeks
-  end
+  scope :due_today, -> { where("date(due_date) = ?", Date.current) }
+  scope :overdue, ->   { where("date(due_date) <= ?", Date.current) }
 end
