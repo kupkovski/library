@@ -7,4 +7,7 @@ class User < ApplicationRecord
   validates :name, :user_type, presence: true
 
   enum :user_type, member: 0, librarian: 1
+
+  has_many :borrowed_books
+  has_many :books, through: :borrowed_books
 end

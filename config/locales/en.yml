@@ -29,3 +29,5 @@
 
 en:
   hello: "Hello world"
+  formats:
+    short: "%d/%b/%Y %H:%M"
