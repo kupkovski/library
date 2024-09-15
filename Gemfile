@@ -34,3 +34,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "pico-rails", "~> 1.5"
