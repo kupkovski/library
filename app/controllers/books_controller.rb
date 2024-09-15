@@ -59,7 +59,6 @@ class BooksController < ApplicationController
 
   # PUT /books/1/borrow
   def borrow
-    binding.irb
     if borrowed_book = @book.borrow!(user: current_user)
       redirect_to book_url(@book), notice: "Book was successfully borrowed."
     else
