@@ -1,22 +1,26 @@
 <% if borrowed_books.any? %>
   <h2>Borrowed Books</h2>
-  <table border="1">
-    <tr>
-      <th>Member</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Borrowed Date</th>
-      <th>Due Date</th>
-    </tr>
-    <% borrowed_books.each do |borrowed_book| %>
-    <% book = borrowed_book.book %>
+  <table class="border-collapse table-fixed w-full text-sm my-4">
+    <thead>
       <tr>
-        <td><%= borrowed_book.user.name %></td>
-        <td><%= link_to book.title, book_path(book) %></td>
-        <td><%= book.author_name %></td>
-        <td><%= l(borrowed_book.created_at, format: :short) %></td>
-        <td><%= l(borrowed_book.due_date, format: :short) %></td>
+        <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Member</th>
+        <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Title</th>
+        <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Author</th>
+        <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Borrowed Date</th>
+        <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 text-left">Due Date</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody class="bg-white">
+      <% borrowed_books.each do |borrowed_book| %>
+      <% book = borrowed_book.book %>
+        <tr>
+          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500"><%= borrowed_book.user.name %></td>
+          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500"><%= link_to book.title, book_path(book) %></td>
+          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500"><%= book.author_name %></td>
+          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500"><%= l(borrowed_book.created_at, format: :short) %></td>
+          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500"><%= l(borrowed_book.due_date, format: :short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 <% end %>
