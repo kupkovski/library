@@ -113,6 +113,16 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-aarch64-linux-musl)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm-linux-musl)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86-linux-musl)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -171,6 +181,8 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
+    pico-rails (1.5.3)
+      sassc (~> 2.0)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -276,6 +288,8 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     securerandom (0.3.1)
     selenium-webdriver (4.24.0)
       base64 (~> 0.2)
@@ -357,6 +371,7 @@ DEPENDENCIES
   factory_bot_rails (~> 6.4)
   importmap-rails
   jbuilder
+  pico-rails (~> 1.5)
   puma (>= 5.0)
   rails (~> 7.2.1)
   rspec (~> 3.13)
