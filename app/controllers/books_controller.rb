@@ -1,3 +1,4 @@
+require_relative "../services/book_borrower"
 class BooksController < ApplicationController
   before_action :set_book, only: %i[show edit update destroy borrow]
 
@@ -59,10 +60,11 @@ class BooksController < ApplicationController
 
   # PUT /books/1/borrow
   def borrow
-    if borrowed_book = @book.borrow!(user: current_user)
+    borrow_book = BookBorrower.call(book: @book, user: current_user)
+    if borrow_book.valid?
       redirect_to book_url(@book), notice: "Book was successfully borrowed."
     else
-      redirect_to book_url(@book), error: "#{borrowed_book.errors.full_messages}"
+      redirect_to book_url(@book), alert: borrow_book.errors.full_messages.join(",")
     end
   end
 

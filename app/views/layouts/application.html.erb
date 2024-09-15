@@ -20,8 +20,6 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <% if user_signed_in? %>
       <p><%= link_to current_user.name, '#' %>&nbsp;&nbsp;
           <%= link_to 'Sign Out',
@@ -29,6 +27,14 @@
               data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }
           %>
       </p>
+    <% if notice.present? %>
+      <article style="color: green"><%= notice %> </article>
+    <% end %>
+
+    <% if alert.present? %>
+      <article style="color: red"><%= alert %> </article>
+    <% end %>
+
     <% else %>
       <%= link_to 'Sign In', new_user_session_path %>
     <% end %>
