@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe "books/index", type: :view do
   before(:each) do
     assign(:books, [
-      Book.create!(
+      create(:book,
         title: "Title",
         author_name: "Author Name",
         genre: "Genre",
         isbn: "Isbn",
         total_copies: 2
       ),
-      Book.create!(
+      create(:book,
         title: "Title",
         author_name: "Author Name",
         genre: "Genre",
@@ -22,7 +22,7 @@ RSpec.describe "books/index", type: :view do
 
   it "renders a list of books" do
     render
-    cell_selector = 'div>p'
+    cell_selector = 'table>tbody>tr'
     assert_select cell_selector, text: Regexp.new("Title".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Author Name".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Genre".to_s), count: 2

@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "books/show", type: :view do
+  let(:user) { create(:user) }
+
   before(:each) do
-    assign(:book, Book.create!(
+    allow(view).to receive(:current_user).and_return(user)
+
+    assign(:book, create(:book,
       title: "Title",
       author_name: "Author Name",
       genre: "Genre",
