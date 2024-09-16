@@ -68,6 +68,16 @@ class BooksController < ApplicationController
     end
   end
 
+  # GET /search
+  def search
+    search_term = "%#{params[:q]}%"
+    @books = Book.where("title like ? OR author_name like ? OR genre like ?", search_term, search_term, search_term)
+
+    respond_to do |format|
+      format.html { render :index }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book

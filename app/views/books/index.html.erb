@@ -1,8 +1,18 @@
-
-
 <% content_for :title, "Books" %>
-
 <h1>Books</h1>
+
+<%= form_tag(search_books_path, :method => "get") do %>
+  <%= label_tag(:q, "Search book:") %>
+
+  <%= search_field_tag(:q, params[:q], placeholder: "Search by title, author name or genre") %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+
+<% if params[:q].present? && @books.blank? %>
+  <h3>No records found.</h3>
+<% end %>
+
 
 <div id="books">
   <% @books.each do |book| %>
