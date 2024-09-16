@@ -1,30 +1,41 @@
-<h2>Librarian Dashboard</h2>
-<table>
-  <tr>
-    <th>Total Books</th>
-    <th>Total Borrowed Books</th>
-    <th>Books Due Today</th>
-  </tr>
-  <tr>
-    <td><%= @books_count %></td>
-    <td><%= borrowed_books.count %></td>
-    <td><%= @books_due_today_count %></td>
-  </tr>
-</table>
+<section>
+  <h2>Librarian Dashboard</h2>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Total Books</th>
+        <th scope="col">Total Borrowed Books</th>
+        <th scope="col">Books Due Today</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @books_count %></td>
+        <td><%= borrowed_books.count %></td>
+        <td><%= @books_due_today_count %></td>
+      </tr>
+    </body>
+  </table>
+</section>
 
-<h3>Members with overdue books</h3>
-<table>
-  <tr>
-    <th>Member Name</th>
-    <th>Book Title</th>
-    <th>Due Date</th>
-  </tr>
-
-  <% @members_with_overdue_books.each do |borrowed_book| %>
-    <tr>
-      <td><%= borrowed_book.user.name %></td>
-      <td><%= link_to borrowed_book.book.title, book_path(borrowed_book.book) %></td>
-      <td><%= l(borrowed_book.due_date, format: :short) %></td>
-    </tr>
-  <% end %>
-</table>
+<section>
+  <h3>Members with overdue books</h3>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Member Name</th>
+        <th scope="col">Book Title</th>
+        <th scope="col">Due Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members_with_overdue_books.each do |borrowed_book| %>
+        <tr>
+          <td><%= borrowed_book.user.name %></td>
+          <td><%= link_to borrowed_book.book.title, book_path(borrowed_book.book) %></td>
+          <td><%= l(borrowed_book.due_date, format: :short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

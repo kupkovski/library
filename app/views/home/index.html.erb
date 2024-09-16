@@ -1,5 +1,3 @@
-<h1>Welcome to Library Management System!</h1>
-
 <% if current_user.librarian? %>
   <%= render "home/librarian", borrowed_books: @borrowed_books %>
 <% else %>

@@ -11,32 +11,21 @@
     </div>
   <% end %>
 
-  <div>
+  <fieldset>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
-  </div>
 
-  <div>
     <%= form.label :author_name, style: "display: block" %>
     <%= form.text_field :author_name %>
-  </div>
 
-  <div>
     <%= form.label :genre, style: "display: block" %>
     <%= form.text_field :genre %>
-  </div>
 
-  <div>
     <%= form.label :isbn, style: "display: block" %>
     <%= form.text_field :isbn %>
-  </div>
 
-  <div>
     <%= form.label :total_copies, style: "display: block" %>
     <%= form.number_field :total_copies %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  </fieldset>
+  <%= form.submit %>
 <% end %>
