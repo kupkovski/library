@@ -1,47 +1,56 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
+  let(:book) { create(:book, total_copies: 2) }
+  let(:user) { create(:user) }
+
   describe 'associations' do
     it { should have_many(:borrowed_books) }
-    let(:book) { create(:book, total_copies: 2) }
-    let(:user) { create(:user) }
+  end
 
-    describe 'available' do
-      context 'when there are copies not borrowed yet' do
-        let(:user) { create(:user) }
-        let!(:borrowed_book) { create(:borrowed_book, book:, user:) }
+  describe 'validations' do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:author_name) }
+    it { should validate_presence_of(:isbn) }
+    it { should validate_presence_of(:genre) }
+    it { should validate_presence_of(:total_copies) }
+  end
 
-        it 'returns true' do
-          expect(BorrowedBook.where(book:).count).to eq 1
-          expect(book).to be_available
-        end
-      end
+  describe 'available' do
+    context 'when there are copies not borrowed yet' do
+      let(:user) { create(:user) }
+      let!(:borrowed_book) { create(:borrowed_book, book:, user:) }
 
-      context 'when all copies were borrowed' do
-        let!(:borrowed_book) { create(:borrowed_book, book:, user:) }
-        let!(:borrowed_book2) { create(:borrowed_book, book:, user:) }
-
-        it 'returns false' do
-          expect(BorrowedBook.where(book:).count).to eq 2
-          expect(book).to_not be_available
-        end
+      it 'returns true' do
+        expect(BorrowedBook.where(book:).count).to eq 1
+        expect(book).to be_available
       end
     end
 
-    describe 'borrowed_by?' do
-      context 'when user borrowed the book' do
-        it 'returns false' do
-          expect(BorrowedBook.where(user: user, book: book).exists?).to be false
-          expect(book.borrowed_by?(user)).to be false
-        end
+    context 'when all copies were borrowed' do
+      let!(:borrowed_book) { create(:borrowed_book, book:, user:) }
+      let!(:borrowed_book2) { create(:borrowed_book, book:, user:) }
+
+      it 'returns false' do
+        expect(BorrowedBook.where(book:).count).to eq 2
+        expect(book).to_not be_available
       end
+    end
+  end
 
-      context 'when user did not borrowed the book' do
-        let!(:borrowed_book) { create(:borrowed_book, book:, user:) }
+  describe 'borrowed_by?' do
+    context 'when user borrowed the book' do
+      it 'returns false' do
+        expect(BorrowedBook.where(user: user, book: book).exists?).to be false
+        expect(book.borrowed_by?(user)).to be false
+      end
+    end
 
-        it 'returns true' do
-          expect(book.borrowed_by?(user)).to be true
-        end
+    context 'when user did not borrowed the book' do
+      let!(:borrowed_book) { create(:borrowed_book, book:, user:) }
+
+      it 'returns true' do
+        expect(book.borrowed_by?(user)).to be true
       end
     end
   end

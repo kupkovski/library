@@ -1,6 +1,8 @@
 class Book < ApplicationRecord
   has_many :borrowed_books
 
+  validates :title, :author_name, :genre, :isbn, :total_copies, presence: true
+
   def available?
     borrowed_books.count < total_copies
   end
